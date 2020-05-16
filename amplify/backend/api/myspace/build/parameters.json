@@ -1,0 +1,7 @@
+{
+    "AppSyncApiName": "myspace",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "S3DeploymentBucket": "fake-bucket",
+    "S3DeploymentRootKey": "amplify-appsync-files/1f6d893ab76e7b1dfaf9450c701184face1de7b8"
+}

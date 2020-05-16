@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-myspace-dev-162855-authRole",
+            "UnauthRoleArn": "arn:aws:iam::102692330669:role/amplify-myspace-dev-162855-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::102692330669:role/amplify-myspace-dev-162855-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "amplify-myspace-dev-162855-deployment",
+            "UnauthRoleName": "amplify-myspace-dev-162855-unauthRole",
+            "StackName": "amplify-myspace-dev-162855",
+            "StackId": "arn:aws:cloudformation:eu-west-1:102692330669:stack/amplify-myspace-dev-162855/4c267d20-9465-11ea-9c81-02c18823f600",
+            "AmplifyAppId": "d1j5yl1qkxbgv1"
+        },
+        "categories": {
+            "auth": {
+                "myspaceef489e73": {}
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+type Note @model {
+  id: ID!
+  type: String!
+  title: String!
+  content: String!
+  articleUrl: String
+  twitterName: String
+  userID: String!
+}
