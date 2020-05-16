@@ -1,26 +1,41 @@
 import React from "react";
 import styled from "styled-components";
-import { Formik, Form } from "formik";
+import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import AuthTemplate from "../templates/AuthTemplate";
-import { routes } from "../Routes/index";
+
 import Heading from "../components/atoms/Heading/Heading";
 import Input from "../components/atoms/Input/Input";
 import Button from "../components/atoms/Button/Button";
 import { authenticate as authenticateAction } from "../actions";
 
-const StyledForm = styled(Form)`
+const StyledForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 40px;
 `;
 
 const StyledInput = styled(Input)`
   margin: 0 0 30px 0;
   height: 40px;
   width: 300px;
+`;
+const Error = styled.span`
+  padding-left: 20px;
+  width: 100%;
+  color: red;
+  font-size: 14px;
+`;
+const Group = styled.div`
+  margin: 0 0 10px 0;
+  width: 300px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
 const StyledLink = styled(Link)`
@@ -32,49 +47,46 @@ const StyledLink = styled(Link)`
   margin: 20px 0 50px;
 `;
 
-const LoginPage = ({ authenticate, authorized }) => (
-  <AuthTemplate>
-    <Formik
-      initialValues={{ username: "", password: "" }}
-      onSubmit={({ username, password }) => {
-        authenticate(username, password);
-      }}
-    >
-      {({ handleChange, handleBlur, values }) => {
-        if (authorized) {
-          return <Redirect to="/" />;
-        }
-        return (
-          <>
-            <Heading>Sign in</Heading>
-            <StyledForm>
-              <StyledInput
-                type="text"
-                name="username"
-                placeholder="Login"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.title}
-              />
-              <StyledInput
-                type="password"
-                name="password"
-                placeholder="Password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.title}
-              />
-              <Button activeColor="notes" type="submit">
-                sign in
-              </Button>
-            </StyledForm>
-            <StyledLink to="/register">I want my account!</StyledLink>
-          </>
-        );
-      }}
-    </Formik>
-  </AuthTemplate>
-);
+const LoginPage = ({ authenticate, authorized }) => {
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = ({ username, password }) => authenticate(username, password);
+  console.log(errors);
+  if (authorized) {
+    return <Redirect to="/" />;
+  }
+  return (
+    <AuthTemplate>
+      <>
+        <Heading>Sign in</Heading>
+        <StyledForm onSubmit={handleSubmit(onSubmit)}>
+          <Group>
+            {errors.username && <Error>This field is required</Error>}
+            <StyledInput
+              type="text"
+              name="username"
+              ref={register({ required: true })}
+              placeholder="Login"
+            />
+          </Group>
+          <Group>
+            {errors.password && <Error>This field is required</Error>}
+            <StyledInput
+              type="password"
+              name="password"
+              ref={register({ required: true })}
+              placeholder="Password"
+            />
+          </Group>
+
+          <Button activeColor="notes" type="submit">
+            sign in
+          </Button>
+        </StyledForm>
+        <StyledLink to="/register">I want my account!</StyledLink>
+      </>
+    </AuthTemplate>
+  );
+};
 const mapStateToProps = ({ userID = null, authorized }) => ({
   userID,
   authorized,

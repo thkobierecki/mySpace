@@ -1,4 +1,3 @@
-import axios from "axios";
 import { API, graphqlOperation, Auth } from "aws-amplify";
 import { listNotes } from "../graphql/queries";
 import { deleteNote, createNote } from "../graphql/mutations";

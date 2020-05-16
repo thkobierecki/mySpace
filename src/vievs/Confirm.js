@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { Formik, Form } from "formik";
+import { useForm } from "react-hook-form";
 import AuthTemplate from "../templates/AuthTemplate";
 import { Redirect } from "react-router-dom";
 import Heading from "../components/atoms/Heading/Heading";
@@ -9,11 +9,12 @@ import Input from "../components/atoms/Input/Input";
 import Button from "../components/atoms/Button/Button";
 import { confirm } from "../actions";
 
-const StyledForm = styled(Form)`
+const StyledForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 30px;
 `;
 
 const StyledInput = styled(Input)`
@@ -21,51 +22,62 @@ const StyledInput = styled(Input)`
   height: 40px;
   width: 300px;
 `;
+const Error = styled.span`
+  padding-left: 20px;
+  width: 100%;
+  color: red;
+  font-size: 14px;
+`;
+const Group = styled.div`
+  margin: 0 0 10px 0;
+  width: 300px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`;
 
 const RegisterPage = ({ confirm }) => {
   const [redirect, setRedirect] = useState(false);
-
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = ({ username, code }) => {
+    confirm(username, code);
+    setRedirect(true);
+  };
+  if (redirect) {
+    return <Redirect to="/login" />;
+  }
   return (
     <AuthTemplate>
-      <Formik
-        initialValues={{ username: "", code: "" }}
-        onSubmit={({ username, code }) => {
-          confirm(username, code);
-          setRedirect(true);
-        }}
-      >
-        {({ handleChange, handleBlur, values }) => {
-          if (redirect) {
-            return <Redirect to="/login" />;
-          }
-          return (
-            <>
-              <Heading>Confirm sign up</Heading>
-              <StyledForm>
-                <StyledInput
-                  type="text"
-                  name="username"
-                  placeholder="Login"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.title}
-                />
-                <StyledInput
-                  type="text"
-                  name="code"
-                  placeholder="Confirmation code"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.title}
-                />
-                <Button activeColor="notes" type="submit">
-                  Confirm sign up
-                </Button>
-              </StyledForm>
-            </>
-          );
-        }}
-      </Formik>
+      <>
+        <Heading>Confirm sign up</Heading>
+        <StyledForm onSubmit={handleSubmit(onSubmit)}>
+          <Group>
+            {" "}
+            {errors.username && <Error>This field is required</Error>}
+            <StyledInput
+              type="text"
+              name="username"
+              placeholder="Login"
+              ref={register({ required: true })}
+            />
+          </Group>
+
+          <Group>
+            {errors.code && <Error>This field is required</Error>}
+            <StyledInput
+              type="text"
+              name="code"
+              placeholder="Confirmation code"
+              ref={register({ required: true })}
+            />
+          </Group>
+
+          <Button activeColor="notes" type="submit">
+            Confirm sign up
+          </Button>
+        </StyledForm>
+      </>
     </AuthTemplate>
   );
 };

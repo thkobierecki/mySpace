@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DetailsTemplate from "../templates/DetailsTemplate";
 import withContext from "../hoc/withContex";
-import { connect } from "react-redux";
+
 import { API, graphqlOperation } from "aws-amplify";
 import { getNote } from "../graphql/queries";
 
