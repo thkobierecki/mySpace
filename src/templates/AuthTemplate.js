@@ -1,7 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Heading from "../components/atoms/Heading/Heading";
-import logoImg from "../assest/icons/logo.svg";
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -13,14 +11,9 @@ const StyledWrapper = styled.div`
   justify-content: center;
 `;
 
-const StyledLogo = styled.img`
-  width: 200px;
-  height: auto;
-`;
-
 const StyledAuthCard = styled.div`
   width: 400px;
-  height: 400px;
+  height: 450px;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.2);
@@ -32,7 +25,6 @@ const StyledAuthCard = styled.div`
 
 const AuthTemplate = ({ children }) => (
   <StyledWrapper>
-    {/* <Heading>Your new favorite online notes experience</Heading> */}
     <StyledAuthCard>{children}</StyledAuthCard>
   </StyledWrapper>
 );

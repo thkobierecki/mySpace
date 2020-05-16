@@ -1,17 +1,16 @@
-import React from 'react';
-import {
-  BrowserRouter, Switch, Route, Redirect,
-} from 'react-router-dom';
-import { Provider } from 'react-redux';
+import React from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { Provider } from "react-redux";
 // import Button from '../components/atoms/Button/Button';
-import store from '../Store';
-import MainTemplate from '../templates/MainTemplate';
-import Note from './Note';
-import Articles from './Articles';
-import Twitters from './Twitters';
-import DetailsPage from './DetailsPage';
-import LoginPage from './LoginPage';
-import RegisterPage from './RegisterPage';
+import store from "../Store";
+import MainTemplate from "../templates/MainTemplate";
+import Note from "./Note";
+import Articles from "./Articles";
+import Twitters from "./Twitters";
+import DetailsPage from "./DetailsPage";
+import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
+import Confirm from "./Confirm";
 
 const Root = () => (
   <Provider store={store}>
@@ -20,6 +19,7 @@ const Root = () => (
         <Switch>
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/confirmation" component={Confirm} />
           <Route exact path="/" render={() => <Redirect to="/notes" />} />
           <Route exact path="/notes" component={Note} />
           <Route path="/notes/details/:id" component={DetailsPage} />

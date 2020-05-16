@@ -1,21 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import AuthTemplate from "../templates/AuthTemplate";
-
+import { Redirect } from "react-router-dom";
 import Heading from "../components/atoms/Heading/Heading";
 import Input from "../components/atoms/Input/Input";
 import Button from "../components/atoms/Button/Button";
-import { authenticate as authenticateAction } from "../actions";
+import { confirm } from "../actions";
 
 const StyledForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 30px;
 `;
 
 const StyledInput = styled(Input)`
@@ -38,63 +37,53 @@ const Group = styled.div`
   justify-content: flex-end;
 `;
 
-const StyledLink = styled(Link)`
-  display: block;
-  font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  color: black;
-  text-transform: uppercase;
-  margin: 20px 0 50px;
-`;
-
-const LoginPage = ({ authenticate, authorized }) => {
+const RegisterPage = ({ confirm }) => {
+  const [redirect, setRedirect] = useState(false);
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = ({ username, password }) => authenticate(username, password);
-  console.log(errors);
-  if (authorized) {
-    return <Redirect to="/" />;
+  const onSubmit = ({ username, code }) => {
+    confirm(username, code);
+    setRedirect(true);
+  };
+  if (redirect) {
+    return <Redirect to="/login" />;
   }
   return (
     <AuthTemplate>
       <>
-        <Heading>Sign in</Heading>
+        <Heading>Confirm sign up</Heading>
         <StyledForm onSubmit={handleSubmit(onSubmit)}>
           <Group>
+            {" "}
             {errors.username && <Error>This field is required</Error>}
             <StyledInput
               type="text"
               name="username"
-              ref={register({ required: true })}
               placeholder="Login"
+              ref={register({ required: true })}
             />
           </Group>
+
           <Group>
-            {errors.password && <Error>This field is required</Error>}
+            {errors.code && <Error>This field is required</Error>}
             <StyledInput
-              type="password"
-              name="password"
+              type="text"
+              name="code"
+              placeholder="Confirmation code"
               ref={register({ required: true })}
-              placeholder="Password"
             />
           </Group>
 
           <Button activeColor="notes" type="submit">
-            sign in
+            Confirm sign up
           </Button>
         </StyledForm>
-        <StyledLink to="/register">I want my account!</StyledLink>
       </>
     </AuthTemplate>
   );
 };
-const mapStateToProps = ({ userID = null, authorized }) => ({
-  userID,
-  authorized,
-});
 
 const mapDispatchToProps = (dispatch) => ({
-  authenticate: (username, password) =>
-    dispatch(authenticateAction(username, password)),
+  confirm: (username, code) => dispatch(confirm(username, code)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(null, mapDispatchToProps)(RegisterPage);

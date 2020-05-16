@@ -1,4 +1,3 @@
-import axios from "axios";
 import { API, graphqlOperation, Auth } from "aws-amplify";
 import { listNotes } from "../graphql/queries";
 import { deleteNote, createNote } from "../graphql/mutations";
@@ -72,19 +71,14 @@ export const register = (username, password, email) => async (dispatch) => {
   } catch (error) {
     console.log("error signing up:", error);
   }
-  // return axios
-  //   .post("http://localhost:9000/api/user/register", {
-  //     username,
-  //     password,
-  //   })
-  //   .then((payload) => {
-  //     console.log(payload);
-  //     dispatch({ type: REGISTER_SUCCESS, payload });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //     dispatch({ type: REGISTER_FAILURE });
-  //   });
+};
+
+export const confirm = (username, code) => async (dispatch) => {
+  try {
+    await Auth.confirmSignUp(username, code);
+  } catch (error) {
+    console.log("error confirming sign up", error);
+  }
 };
 
 export const fetchItems = (itemType) => async (dispatch, getState) => {
