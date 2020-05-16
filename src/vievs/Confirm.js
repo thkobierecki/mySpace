@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 import AuthTemplate from "../templates/AuthTemplate";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Heading from "../components/atoms/Heading/Heading";
 import Input from "../components/atoms/Input/Input";
 import Button from "../components/atoms/Button/Button";
-import { register } from "../actions";
+import { confirm } from "../actions";
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -22,42 +22,26 @@ const StyledInput = styled(Input)`
   width: 300px;
 `;
 
-const StyledLink = styled(Link)`
-  display: block;
-  font-weight: ${({ theme }) => theme.bold};
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  color: black;
-  text-transform: uppercase;
-  margin: 20px 0 50px;
-`;
-
-const RegisterPage = ({ register }) => {
+const RegisterPage = ({ confirm }) => {
   const [redirect, setRedirect] = useState(false);
+
   return (
     <AuthTemplate>
       <Formik
-        initialValues={{ username: "", password: "", email: "" }}
-        onSubmit={({ username, password, email }) => {
-          register(username, password, email);
+        initialValues={{ username: "", code: "" }}
+        onSubmit={({ username, code }) => {
+          confirm(username, code);
           setRedirect(true);
         }}
       >
         {({ handleChange, handleBlur, values }) => {
           if (redirect) {
-            return <Redirect to="/confirmation" />;
+            return <Redirect to="/login" />;
           }
           return (
             <>
-              <Heading>Sign up</Heading>
+              <Heading>Confirm sign up</Heading>
               <StyledForm>
-                <StyledInput
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.title}
-                />
                 <StyledInput
                   type="text"
                   name="username"
@@ -67,18 +51,17 @@ const RegisterPage = ({ register }) => {
                   value={values.title}
                 />
                 <StyledInput
-                  type="password"
-                  name="password"
-                  placeholder="Password"
+                  type="text"
+                  name="code"
+                  placeholder="Confirmation code"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.title}
                 />
                 <Button activeColor="notes" type="submit">
-                  register
+                  Confirm sign up
                 </Button>
               </StyledForm>
-              <StyledLink to="/login">I want to log in!</StyledLink>
             </>
           );
         }}
@@ -87,13 +70,8 @@ const RegisterPage = ({ register }) => {
   );
 };
 
-const mapStateToProps = ({ authorized }) => ({
-  authorized,
-});
-
 const mapDispatchToProps = (dispatch) => ({
-  register: (username, password, email) =>
-    dispatch(register(username, password, email)),
+  confirm: (username, code) => dispatch(confirm(username, code)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);
+export default connect(null, mapDispatchToProps)(RegisterPage);

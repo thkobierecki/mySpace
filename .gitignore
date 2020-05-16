@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+../myNotes/frontend/amplify/mock-data
+amplify/mock-data
