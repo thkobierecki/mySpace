@@ -26,8 +26,17 @@
 							"apiKeyExpirationDays": "365"
 						}
 					}
-				}
-			}
+				},
+				"GraphQLAPIIdOutput": "4qr2qezv6ja3lhyyxusun363jm",
+				"GraphQLAPIEndpointOutput": "https://zmt2jrt3drhh5dql6i4r4t7q2y.appsync-api.eu-west-1.amazonaws.com/graphql",
+				"GraphQLAPIKeyOutput": "da2-2pllurnobvctxg47ixeg4fh6ne"
+			},
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/amplify-myspace-dev-162855-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"logicalId": "apimyspace"
+			},
+			"lastPushTimeStamp": "2020-05-17T11:16:43.693Z",
+			"lastPushDirHash": "VWXm4vuyx5jO2lj7wH3alBfbYDQ="
 		}
 	},
 	"auth": {
@@ -36,7 +45,7 @@
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],
 			"customAuth": false,
-			"lastPushTimeStamp": "2020-05-14T15:03:54.396Z",
+			"lastPushTimeStamp": "2020-05-17T11:16:43.357Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-myspace-dev-162855-deployment/amplify-cfn-templates/auth/myspaceef489e73-cloudformation-template.yml",
 				"logicalId": "authmyspaceef489e73"
@@ -67,7 +76,7 @@
 					]
 				}
 			],
-			"lastPushTimeStamp": "2020-05-14T15:03:54.396Z",
+			"lastPushTimeStamp": "2020-05-17T11:16:43.361Z",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/amplify-myspace-dev-162855-deployment/amplify-cfn-templates/auth/template.json",
 				"logicalId": "authuserPoolGroups"

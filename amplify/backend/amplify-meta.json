@@ -1,81 +1,90 @@
 {
-	"providers": {
-		"awscloudformation": {
-			"AuthRoleName": "amplify-myspace-dev-162855-authRole",
-			"UnauthRoleArn": "arn:aws:iam::102692330669:role/amplify-myspace-dev-162855-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::102692330669:role/amplify-myspace-dev-162855-authRole",
-			"Region": "eu-west-1",
-			"DeploymentBucketName": "amplify-myspace-dev-162855-deployment",
-			"UnauthRoleName": "amplify-myspace-dev-162855-unauthRole",
-			"StackName": "amplify-myspace-dev-162855",
-			"StackId": "arn:aws:cloudformation:eu-west-1:102692330669:stack/amplify-myspace-dev-162855/4c267d20-9465-11ea-9c81-02c18823f600",
-			"AmplifyAppId": "d1j5yl1qkxbgv1"
-		}
-	},
-	"api": {
-		"myspace": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"authConfig": {
-					"additionalAuthenticationProviders": [],
-					"defaultAuthentication": {
-						"authenticationType": "API_KEY",
-						"apiKeyConfig": {
-							"description": "mySpace",
-							"apiKeyExpirationDays": "365"
-						}
-					}
-				}
-			}
-		}
-	},
-	"auth": {
-		"myspaceef489e73": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [],
-			"customAuth": false,
-			"lastPushTimeStamp": "2020-05-14T15:03:54.396Z",
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-myspace-dev-162855-deployment/amplify-cfn-templates/auth/myspaceef489e73-cloudformation-template.yml",
-				"logicalId": "authmyspaceef489e73"
-			},
-			"output": {
-				"AppClientSecret": "80hmbqg91j5ps7ojfmdbsokdu43e45o55oe3sc68qiq077vcjpf",
-				"UserPoolId": "eu-west-1_bKWc9TEcq",
-				"AppClientIDWeb": "2m3q8n67s90dhu00pn3hvphbh7",
-				"AppClientID": "7f80jn6k3sc87ks7kvrt31dj2u",
-				"IdentityPoolId": "eu-west-1:cbb98c46-9df4-49ec-bb61-f73b62dad964",
-				"IdentityPoolName": "myspaceef489e73_identitypool_ef489e73__dev",
-				"UserPoolName": "myspaceef489e73_userpool_ef489e73"
-			},
-			"lastPushDirHash": "8rKSvhGYpL+aaCygyUh5pXr7g0o="
-		},
-		"userPoolGroups": {
-			"service": "Cognito-UserPool-Groups",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [
-				{
-					"category": "auth",
-					"resourceName": "myspaceef489e73",
-					"attributes": [
-						"UserPoolId",
-						"AppClientIDWeb",
-						"AppClientID",
-						"IdentityPoolId"
-					]
-				}
-			],
-			"lastPushTimeStamp": "2020-05-14T15:03:54.396Z",
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/amplify-myspace-dev-162855-deployment/amplify-cfn-templates/auth/template.json",
-				"logicalId": "authuserPoolGroups"
-			},
-			"output": {
-				"mySpaceGroupRole": "arn:aws:iam::102692330669:role/eu-west-1_bKWc9TEcq-mySpaceGroupRole"
-			},
-			"lastPushDirHash": "uz90vA3dq4ya4Kdnp5Vt+LCtw7c="
-		}
-	}
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-myspace-dev-162855-authRole",
+            "UnauthRoleArn": "arn:aws:iam::102692330669:role/amplify-myspace-dev-162855-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::102692330669:role/amplify-myspace-dev-162855-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "amplify-myspace-dev-162855-deployment",
+            "UnauthRoleName": "amplify-myspace-dev-162855-unauthRole",
+            "StackName": "amplify-myspace-dev-162855",
+            "StackId": "arn:aws:cloudformation:eu-west-1:102692330669:stack/amplify-myspace-dev-162855/4c267d20-9465-11ea-9c81-02c18823f600",
+            "AmplifyAppId": "d1j5yl1qkxbgv1"
+        }
+    },
+    "api": {
+        "myspace": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "authConfig": {
+                    "additionalAuthenticationProviders": [],
+                    "defaultAuthentication": {
+                        "authenticationType": "API_KEY",
+                        "apiKeyConfig": {
+                            "description": "mySpace",
+                            "apiKeyExpirationDays": "365"
+                        }
+                    }
+                },
+                "GraphQLAPIIdOutput": "4qr2qezv6ja3lhyyxusun363jm",
+                "GraphQLAPIEndpointOutput": "https://zmt2jrt3drhh5dql6i4r4t7q2y.appsync-api.eu-west-1.amazonaws.com/graphql",
+                "GraphQLAPIKeyOutput": "da2-2pllurnobvctxg47ixeg4fh6ne"
+            },
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-myspace-dev-162855-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+                "logicalId": "apimyspace"
+            },
+            "lastPushTimeStamp": "2020-05-17T11:31:47.168Z",
+            "lastPushDirHash": "VWXm4vuyx5jO2lj7wH3alBfbYDQ="
+        }
+    },
+    "auth": {
+        "myspaceef489e73": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [],
+            "customAuth": false,
+            "lastPushTimeStamp": "2020-05-17T11:31:47.174Z",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-myspace-dev-162855-deployment/amplify-cfn-templates/auth/myspaceef489e73-cloudformation-template.yml",
+                "logicalId": "authmyspaceef489e73"
+            },
+            "output": {
+                "AppClientSecret": "80hmbqg91j5ps7ojfmdbsokdu43e45o55oe3sc68qiq077vcjpf",
+                "UserPoolId": "eu-west-1_bKWc9TEcq",
+                "AppClientIDWeb": "2m3q8n67s90dhu00pn3hvphbh7",
+                "AppClientID": "7f80jn6k3sc87ks7kvrt31dj2u",
+                "IdentityPoolId": "eu-west-1:cbb98c46-9df4-49ec-bb61-f73b62dad964",
+                "IdentityPoolName": "myspaceef489e73_identitypool_ef489e73__dev",
+                "UserPoolName": "myspaceef489e73_userpool_ef489e73"
+            },
+            "lastPushDirHash": "8rKSvhGYpL+aaCygyUh5pXr7g0o="
+        },
+        "userPoolGroups": {
+            "service": "Cognito-UserPool-Groups",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [
+                {
+                    "category": "auth",
+                    "resourceName": "myspaceef489e73",
+                    "attributes": [
+                        "UserPoolId",
+                        "AppClientIDWeb",
+                        "AppClientID",
+                        "IdentityPoolId"
+                    ]
+                }
+            ],
+            "lastPushTimeStamp": "2020-05-17T11:31:47.177Z",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/amplify-myspace-dev-162855-deployment/amplify-cfn-templates/auth/template.json",
+                "logicalId": "authuserPoolGroups"
+            },
+            "output": {
+                "mySpaceGroupRole": "arn:aws:iam::102692330669:role/eu-west-1_bKWc9TEcq-mySpaceGroupRole"
+            },
+            "lastPushDirHash": "uz90vA3dq4ya4Kdnp5Vt+LCtw7c="
+        }
+    }
 }
