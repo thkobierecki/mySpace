@@ -53,6 +53,9 @@ const StyledButtonIcon = styled(ButtonIcon)`
   background-color: ${({ activeColor, theme }) => theme[activeColor]};
   background-size: 40%;
   z-index: 10000;
+  :focus {
+    outline: none;
+  }
 `;
 const GridTemplate = ({ children, pageContext, filterArray }) => {
   const [visible, setVisible] = useState(false);
