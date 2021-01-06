@@ -7,7 +7,7 @@
     "@storybook/addon-knobs": "^5.1.8",
     "aws-amplify": "^3.0.10",
     "aws-amplify-react": "^4.1.9",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "eslint": "^5.16.0",
     "formik": "^1.5.7",
     "prop-types": "^15.7.2",
